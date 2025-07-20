@@ -1,11 +1,12 @@
 import './App.css'
 
 function App() {
-  return (
-    <div className="bg-red-500 text-white p-6 rounded-lg shadow-lg">
-        Hello!
-    </div>
-  )
+    return (
+        <div className="App">
+            <h1>Welcome to the React App</h1>
+            <p>This is a simple application to demonstrate React functionality.</p>
+        </div>
+    )
 }
 
 export default App
