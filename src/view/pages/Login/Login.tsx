@@ -43,7 +43,7 @@ export function Login() {
                 </button>
                 <div className="mt-1 mb-4 text-center">
                     <button onClick={() => navigate("/")}
-                            className="text-sm text-gray-500 hover:text-gray-700 underline cursor-pointer mt-3.5">Home
+                            className="text-sm text-gray-500 hover:text-gray-700 underline cursor-pointer mt-3.5">CustomerDashboard
                     </button>
                 </div>
             </form>
@@ -74,6 +74,8 @@ export function Login() {
                 password: data.password
             };
 
+            console.log("User Credentials:", userCredentials);
+
             const response = await backendApi.post('/auth/login', userCredentials);
             const accessToken = response.data.accessToken;
             const refreshToken = response.data.refreshToken;
@@ -86,8 +88,21 @@ export function Login() {
             localStorage.setItem('username', user.username as string);
             localStorage.setItem('role', user.role as string);
 
-            alert("Successfully logged in!");
-            navigate('/');
+            swal.fire({
+                title: 'Login Successful',
+                text: 'You have been logged in successfully.',
+                icon: 'success',
+                timer: 1000
+            })
+
+            console.log("User Role:", user.role);
+
+            if (user.role === "customer" || null) {
+                navigate('/customer-dashboard');
+            }else {
+                navigate('/admin-dashboard')
+            }
+
         } catch (error) {
             console.error(error);
             swal.fire({

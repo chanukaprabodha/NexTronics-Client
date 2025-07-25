@@ -5,10 +5,12 @@ import {backendApi} from "../api.ts";
 
 interface ProductState {
     list: ProductData[],
-    error: string | null | undefined
+    error: string | null | undefined,
+    product: ProductData | null
 }
 
 const initialState: ProductState = {
+    product: null,
     list: [],
     error: null
 }
@@ -16,9 +18,15 @@ const initialState: ProductState = {
 export const getAllProducts = createAsyncThunk(
     'product/getAllProducts',
     async () => {
-        /*const responsePromise = await fetch('./product-data.json');
-        return await responsePromise.json();*/
         const response = await backendApi.get("/products/all");
+        return await response.data;
+    }
+);
+
+export const getProductById = createAsyncThunk(
+    'product/getProductById',
+    async (id: string) => {
+        const response = await backendApi.get(`/products/${id}`);
         return await response.data;
     }
 );
@@ -29,13 +37,6 @@ const productSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getAllProducts.pending, () => {
-            Swal.fire({
-                title: 'Loading',
-                text: 'Please wait while products are being loaded',
-                icon: 'info',
-                showConfirmButton: false,
-                timer: 2000
-            })
         }).addCase(getAllProducts.fulfilled, (state: ProductState, action) => {
             state.list = action.payload;
         }).addCase(getAllProducts.rejected, (state: ProductState, action) => {
@@ -46,7 +47,19 @@ const productSlice = createSlice({
                 icon: 'error',
                 confirmButtonText: 'OK'
             })
-        })
+
+        }).addCase(getProductById.pending, () => {
+        }).addCase(getProductById.fulfilled, (state: ProductState, action) => {
+            state.product = action.payload;
+        }).addCase(getProductById.rejected, (state: ProductState, action) => {
+            state.error = (action.payload as Error)?.message || 'Failed to fetch product';
+            Swal.fire({
+                title: 'Error',
+                text: state.error,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
+        });
     }
 });
 

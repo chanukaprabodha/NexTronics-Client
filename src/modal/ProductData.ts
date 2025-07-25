@@ -3,5 +3,8 @@ export interface ProductData {
     name: string,
     price: number,
     currency: string,
-    image: string
+    image: string,
+    description: string,
+    quantity: number,
+    isWishlisted?: boolean
 }

@@ -10,7 +10,7 @@ export const isTokenExpired = (token: string) => {
         return Date.now() >= exp * 1000
     } catch (error) {
         console.error("Error decoding token:", error);
-        return true; // If there's an error, we assume the token is expired
+        return true;
     }
 }
 

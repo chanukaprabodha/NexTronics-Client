@@ -4,7 +4,6 @@ export const backendApi = axios.create({
     baseURL: 'http://localhost:3000/api'
 });
 
-// Add a request interceptor to include the token in headers
 backendApi.interceptors.request.use(
     (config ) => {
         const token = localStorage.getItem("token");
