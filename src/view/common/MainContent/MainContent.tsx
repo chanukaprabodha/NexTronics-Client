@@ -36,9 +36,6 @@ export function MainContent({role}: MainContentProps) {
             </>
         );
     }
-
-    console.log("Role in MainContent:", role);
-    console.log("Routes in MainContent:", routes);
     return (
         <div className="flex flex-col flex-grow w-full h-full p-4 bg-gray-100">
             <Routes>

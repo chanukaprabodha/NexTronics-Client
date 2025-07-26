@@ -57,44 +57,6 @@ export function Navbar(onToggleSidebar, cartItemCount) {
     }, []);
 
     return (
-        /*<div className="navbar flex items-center justify-between px-9 bg-gradient-to-br from-green-100 to-green-50">
-            <div className="navbar_logo flex items-center">
-                <img src={logo as string} alt="" className='w-16'/>
-                <p className="business_name ps-1 tracking-[0.2rem] font-semibold ">GreenHarvest</p>
-            </div>
-            <div className="navbar_links">
-                <nav>
-                    <ul className='flex items-center gap-8 '>
-                        {
-                            role === 'customer' && (
-                                <>
-                                    <li className='hover:text-[#dad7cb]'>
-                                        <Link to="/">CustomerDashboard</Link>
-                                    </li>
-                                    <li className='hover:text-[#dad7cb]'>
-                                        <Link to="/about">About</Link>
-                                    </li>
-                                    <li className='hover:text-[#dad7cb]'>
-                                        <Link to="/contact">Contact</Link>
-                                    </li>
-                                    <li><Link to={"/shoppingCart"}><img src={cart as string} alt=""
-                                                                        className='w-12 hover:scale-125 ease-in-out duration-300'/></Link>
-                                    </li>
-                                </>
-                            )
-                        }
-                    </ul>
-                </nav>
-            </div>
-            {username ? (
-                <p className="text-2xl text-white">{username}</p>
-            ) : (
-                <button
-                    className="sign-in-btn bg-green-200 border-0 rounded-2xl py-2.5 px-5 text-base cursor-pointer ease delay-75 hover:bg-green-300 font-semibold">
-                    <Link to="/login">Sign In</Link>
-                </button>
-            )}
-        </div>*/
 
         <header className="bg-white shadow-sm border-b border-gray-200">
             {
@@ -128,17 +90,6 @@ export function Navbar(onToggleSidebar, cartItemCount) {
                             <div className="md:hidden">
                                 <button className="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100">
                                     <Search className="w-5 h-5"/>
-                                </button>
-                            </div>
-
-                            <div className="relative">
-                                <button
-                                    className="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 relative">
-                                    <Bell className="w-5 h-5"/>
-                                    <span
-                                        className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
-                <span className="text-xs text-white font-medium">3</span>
-              </span>
                                 </button>
                             </div>
 
@@ -211,13 +162,6 @@ export function Navbar(onToggleSidebar, cartItemCount) {
                                 {/* Mobile search */}
                                 <button className="md:hidden p-2 text-gray-400 hover:text-gray-500 transition-colors">
                                     <Search className="h-5 w-5"/>
-                                </button>
-
-                                {/* Notifications */}
-                                <button className="p-2 text-gray-400 hover:text-gray-500 transition-colors relative">
-                                    <Bell className="h-5 w-5"/>
-                                    <span
-                                        className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white rounded-full text-xs flex items-center justify-center">3</span>
                                 </button>
 
                                 {/* Cart */}

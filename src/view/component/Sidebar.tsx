@@ -11,7 +11,7 @@ import {
     Users,
     X
 } from 'lucide-react';
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -19,9 +19,12 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     const [role, setRole] = useState<string | null>(null);
+
     const [activeSection, setActiveSection] = useState<string>("Dashboard"); // Default to "Dashboard"
 
     const navigate = useNavigate();
+
+    const location = useLocation();
 
     useEffect(() => {
         const userRole = localStorage.getItem('role');
@@ -38,15 +41,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     ];
 
     const customerNavigationItems = [
-        { id: 'Dashboard', label: 'Home', icon: Home },
-        { id: 'Orders', label: 'My Orders', icon: Package },
-        { id: 'Wishlist', label: 'Wishlist', icon: Heart },
-        { id: 'Account', label: 'Setting', icon: Settings },
-        { id: 'Support', label: 'Support', icon: HelpCircle },
+        { id: 'Dashboard', label: 'Home', icon: Home, href: '/customer-dashboard' },
+        { id: 'Orders', label: 'My Orders', icon: Package, href: '#' },
+        { id: 'Wishlist', label: 'Wishlist', icon: Heart, href: '#' },
+        { id: 'Account', label: 'Setting', icon: Settings, href: '#' },
+        { id: 'Support', label: 'Support', icon: HelpCircle, href: '#' },
     ];
 
-    const handleSectionChange = (section: string, href: string) => {
-        setActiveSection(section);
+    const handleSectionChange = ( href: string) => {
         navigate(href);
     };
 
@@ -56,6 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                 fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
                 lg:translate-x-0 lg:static lg:inset-0
                 ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+                w-[250px] min-w-[250px] max-w-[250px] flex-shrink-0
             `}>
                 <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
                     <div className="flex items-center space-x-3">
@@ -77,12 +80,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                         <div className="px-4 space-y-2">
                             {adminNavigationItems.map((item) => {
                                 const Icon = item.icon;
-                                const isActive = activeSection === item.name;
+                                const isActive = location.pathname === item.href;
 
                                 return (
                                     <button
                                         key={item.name}
-                                        onClick={() => handleSectionChange(item.name, item.href)}
+                                        onClick={() => handleSectionChange(item.href)}
                                         className={`
                                         w-full flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200
                                         ${isActive
@@ -105,12 +108,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                         <div className="px-4 space-y-2">
                             {customerNavigationItems.map((item) => {
                                 const Icon = item.icon;
-                                const isActive = activeSection === item.id;
+                                const isActive = location.pathname === item.href;
 
                                 return (
                                     <button
                                         key={item.id}
-                                        onClick={() => handleSectionChange(item.id)}
+                                        onClick={() => handleSectionChange(item.href)}
                                         className={`
                                         w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200
                                         ${isActive

@@ -4,11 +4,7 @@ import type {AppDispatch, RootState} from "../../../store/store.ts";
 import {getProductById} from "../../../slices/productSlice.ts";
 import {ShoppingCart} from "lucide-react";
 import {useEffect} from "react";
-
-const images: Record<string, string> = import.meta.glob('/src/assets/images/products/*', {
-    eager: true,
-    import: 'default'
-});
+import swal from "sweetalert2";
 
 export function ProductDetails() {
 
@@ -16,19 +12,33 @@ export function ProductDetails() {
 
     const dispatch = useDispatch<AppDispatch>();
 
-    useEffect(() => {
-        if (id) {
-            dispatch(getProductById(id));
-        }
+    useEffect( () => {
+        const fetchProduct = async () => {
+            if (id) {
+                await dispatch(getProductById(id));
+            }
+        };
+        fetchProduct();
     }, [id, dispatch]);
 
     const product = useSelector((state: RootState) => state.product.product);
 
-    const image = product ? images[`/src/assets/images/products/${product.image}`] : null;
+    // const image = product ? images[`/src/assets/images/products/${product.image}`] : null;
 
     if (!product) {
-        return <p>Loading product details...</p>;
+         swal.fire({
+            title: 'Loading Product',
+            text: 'Please wait while we load the product details.',
+            icon: 'info',
+            showConfirmButton: false,
+            timer: 2000
+        });
+         return null;
     }
+
+    const fileName = product.image ? product.image.split('/').pop(): '';
+
+    console.log(product);
 
     return (
         <>
@@ -37,7 +47,7 @@ export function ProductDetails() {
                     <div className="lg:w-4/5 mx-auto flex flex-wrap">
                         <img alt="ecommerce"
                              className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                             src={image}/>
+                             src={`http://localhost:3000/uploads/${fileName}`} />
                         <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                             <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
                             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.name}</h1>
@@ -101,11 +111,7 @@ export function ProductDetails() {
                                 </a>
                               </span>
                             </div>
-                            <p className="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave
-                                tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole
-                                raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue
-                                bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami
-                                cardigan.</p>
+                            <p className="leading-relaxed">{product.description}</p>
                             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100">
                                 <span className="title-font font-medium text-2xl text-gray-900">${product.price}</span>
                                 <button

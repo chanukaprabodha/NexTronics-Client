@@ -24,6 +24,16 @@ export function CustomerDashboard() {
         dispatch(getAllProducts());
     }, []);
 
+    if (!list || list.length === 0) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <p className="text-gray-500">No products available at the moment.</p>
+            </div>
+        );
+    }
+
+    console.log(list);
+
     return (
         <>
             <div className="flex-1 p-6 lg:p-8 pb-20 lg:pb-8">

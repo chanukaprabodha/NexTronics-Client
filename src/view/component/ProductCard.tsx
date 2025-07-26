@@ -10,24 +10,26 @@ type ProductProps = {
     data: ProductData
 }
 
-const images: Record<string, string> = import.meta.glob('/src/assets/images/products/*',{
+/*const images: Record<string, string> = import.meta.glob('/src/assets/images/products/!*',{
         eager: true,
         import: 'default'
-    });
+    });*/
 
 export function ProductCard({data}: ProductProps) {
-    const image = images[`/src/assets/images/products/${data.image}`];
+    // const image = images[`/src/assets/images/products/${data.image}`];
 
     const dispatch = useDispatch<AppDispatch>();
 
-    const item = useSelector(
+    /*const item = useSelector(
         (state: RootState) =>
             state.cart.items.find(cartItem => cartItem.product.id === data.id)
-    );
+    );*/
 
     const addToCart = () => {
         dispatch(addItemToCart(data));
     };
+
+    const fileName = data.image.split('/').pop();
 
     return (
         <Link to={`/product/${data.id}`}>
@@ -35,9 +37,9 @@ export function ProductCard({data}: ProductProps) {
                 className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group">
                 <div className="relative">
                     <img
-                        src={image}
+                        src={`http://localhost:3000/uploads/${fileName}`}
                         alt={data.name}
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-75 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <button
                         className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors">
