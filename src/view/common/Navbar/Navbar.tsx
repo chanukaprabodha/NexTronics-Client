@@ -2,6 +2,9 @@ import {useEffect, useState} from "react";
 import {Bell, ChevronDown, LogOut, Menu, Package, Search, Settings, ShoppingCart, User} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import swal from "sweetalert2";
+import {useCart} from "../../../context/CartContext.tsx";
+import {useDispatch} from "react-redux";
+import {clearCart, setUserId} from "../../../slices/cartSlice.ts";
 
 interface NavbarProps {
     onToggleSidebar: () => void;
@@ -9,6 +12,8 @@ interface NavbarProps {
 }
 
 export function Navbar(onToggleSidebar, cartItemCount) {
+
+    const dispatch = useDispatch();
 
     const [username, setUsername] = useState<string | null>(null);
 
@@ -21,6 +26,8 @@ export function Navbar(onToggleSidebar, cartItemCount) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const navigate = useNavigate();
+
+    const {setIsOpen} = useCart();
 
     const handleLogout = () => {
         swal.fire({
@@ -35,8 +42,10 @@ export function Navbar(onToggleSidebar, cartItemCount) {
             if (result.isConfirmed) {
                 localStorage.removeItem("token");
                 localStorage.removeItem("refreshToken");
-                localStorage.removeItem("username");
+                localStorage.removeItem("name");
                 localStorage.removeItem("role");
+                dispatch(clearCart());
+                dispatch(setUserId(null));
                 swal.fire({
                         icon: 'success',
                         title: 'Logged out successfully',
@@ -50,7 +59,7 @@ export function Navbar(onToggleSidebar, cartItemCount) {
     }
 
     useEffect(() => {
-        const storedUsername = localStorage.getItem("username");
+        const storedUsername = localStorage.getItem("name");
         const storedRole = localStorage.getItem("role");
         setUsername(storedUsername);
         setRole(storedRole);
@@ -165,7 +174,11 @@ export function Navbar(onToggleSidebar, cartItemCount) {
                                 </button>
 
                                 {/* Cart */}
-                                <button className="p-2 text-gray-400 hover:text-gray-500 transition-colors relative">
+                                <button className="p-2 text-gray-400 hover:text-gray-500 transition-colors relative"
+                                onClick={() => {
+                                    console.log("Cart button clicked");
+                                    setIsOpen(true)
+                                }}>
                                     <ShoppingCart className="h-5 w-5"/>
                                     {cartItemCount > 0 && (
                                         <span

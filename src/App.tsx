@@ -4,8 +4,6 @@ import {Login} from "./view/Pages/Login/Login.tsx";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {isTokenExpired} from "./auth/auth.ts";
-import {CustomerDashboard} from "./view/pages/Dashboards/CustomerDashboard.tsx";
-import {ProductDetails} from "./view/common/Product/ProductDetails.tsx";
 import {DefaultLayout} from "./view/common/DefaultLayout/DefaultLayout.tsx";
 
 function App() {

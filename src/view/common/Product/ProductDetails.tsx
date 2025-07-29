@@ -38,8 +38,6 @@ export function ProductDetails() {
 
     const fileName = product.image ? product.image.split('/').pop(): '';
 
-    console.log(product);
-
     return (
         <>
             <section className="text-gray-600 body-font overflow-hidden">

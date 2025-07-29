@@ -4,6 +4,8 @@ import Sidebar from "../../component/Sidebar.tsx";
 import * as React from "react";
 import {useState} from "react";
 import {MainContent} from "../MainContent/MainContent.tsx";
+import {CartProvider} from "../../../context/CartContext.tsx";
+import {ShoppingCart} from "../../pages/Shopping Cart/ShoppingCart.tsx";
 
 export function DefaultLayout() {
 
@@ -16,23 +18,27 @@ export function DefaultLayout() {
     const role = localStorage.getItem("role") || "guest";
 
     return (
-        <div className="flex h-screen">
-            <Sidebar isOpen={sidebarOpen} role={role}/>
+        <CartProvider>
+            <div className="flex h-screen">
+                <Sidebar isOpen={sidebarOpen} role={role}/>
 
-            {/* Main Content Area */}
-            <div className="flex flex-col flex-grow">
-                {/* Horizontal Navbar */}
-                <Navbar onToggleSidebar={toggleSidebar} role={role}/>
+                {/* Main Content Area */}
+                <div className="flex flex-col flex-grow">
+                    {/* Horizontal Navbar */}
+                    <Navbar onToggleSidebar={toggleSidebar} role={role}/>
+                    <ShoppingCart/>
 
-                {/* Main Content */}
-                <main className="flex-grow overflow-y-auto bg-gray-50">
-                    <MainContent role={role}/>
-                    <Footer/>
-                </main>
+                    {/* Main Content */}
+                    <main className="flex-grow overflow-y-auto bg-gray-50">
+                        <MainContent role={role}/>
+                        <Footer/>
+                    </main>
 
-                {/* Footer */}
+                    {/* Footer */}
 
+                </div>
             </div>
-        </div>
+        </CartProvider>
+
     );
 }

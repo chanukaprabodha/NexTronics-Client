@@ -1,5 +1,5 @@
 import {jwtDecode} from 'jwt-decode';
-import type {UserData} from "../modal/UserData.ts";
+import type {User} from "../modal/User.ts";
 
 export const isTokenExpired = (token: string) => {
     try {
@@ -15,5 +15,5 @@ export const isTokenExpired = (token: string) => {
 }
 
 export const getUserFromToken = (token: string) => {
-    return jwtDecode<UserData>(token);
+    return jwtDecode<User>(token);
 }

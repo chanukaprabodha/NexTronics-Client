@@ -4,6 +4,7 @@ import {Login} from "../../pages/Login/Login.tsx";
 import {AdminDashboard} from "../../pages/Dashboards/AdminDashboard.tsx";
 import {ProductDetails} from "../Product/ProductDetails.tsx";
 import {ManageProducts} from "../../pages/ManageProducts.tsx";
+import {ShoppingCart} from "../../pages/Shopping Cart/ShoppingCart.tsx";
 
 type MainContentProps = {
     role: string;
@@ -20,6 +21,7 @@ export function MainContent({role}: MainContentProps) {
             <>
                 <Route path="/customer-dashboard" element={<CustomerDashboard />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/cart" element={<ShoppingCart />} />
             </>
         );
     } else if (role === "admin") {

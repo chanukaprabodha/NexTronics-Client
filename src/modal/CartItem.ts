@@ -1,6 +1,8 @@
-import type {ProductData} from "./ProductData.ts";
-
 export interface CartItem {
-    product: ProductData,
-    itemCount: number
+    productId: string;
+    name: string;
+    price: number;
+    quantity: number;
+    image: string;
+    currency: string;
 }

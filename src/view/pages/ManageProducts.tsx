@@ -17,7 +17,6 @@ export function ManageProducts() {
 
     const [isEditOpen, setIsEditOpen] = useState(false); // State for update modal
 
-
     const [formData, setFormData] = useState({
         id: 0,
         name: "",
