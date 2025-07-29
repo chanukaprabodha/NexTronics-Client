@@ -22,20 +22,18 @@ export function DefaultLayout() {
             <div className="flex h-screen">
                 <Sidebar isOpen={sidebarOpen} role={role}/>
 
-                {/* Main Content Area */}
+                {/* Right Content: Navbar + Main + Footer */}
                 <div className="flex flex-col flex-grow">
-                    {/* Horizontal Navbar */}
                     <Navbar onToggleSidebar={toggleSidebar} role={role}/>
                     <ShoppingCart/>
 
-                    {/* Main Content */}
-                    <main className="flex-grow overflow-y-auto bg-gray-50">
-                        <MainContent role={role}/>
+                    {/* MainContent + Footer Container */}
+                    <div className="flex flex-col flex-grow overflow-y-auto bg-gray-50">
+                        <main className="flex-grow">
+                            <MainContent role={role}/>
+                        </main>
                         <Footer/>
-                    </main>
-
-                    {/* Footer */}
-
+                    </div>
                 </div>
             </div>
         </CartProvider>

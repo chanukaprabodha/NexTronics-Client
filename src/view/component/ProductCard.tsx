@@ -1,12 +1,10 @@
 import type {ProductData} from "../../modal/ProductData.ts";
-import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../../store/store.ts";
-import {addToCart, saveCartData, setUserId} from "../../slices/cartSlice.ts";
+import {useDispatch, } from "react-redux";
+import type {AppDispatch, } from "../../store/store.ts";
+import {addToCart, saveCartData, } from "../../slices/cartSlice.ts";
 import {Heart, ShoppingCart} from "lucide-react";
 import {Link} from "react-router-dom";
 import swal from "sweetalert2";
-import {useEffect} from "react";
-import {jwtDecode} from "jwt-decode";
 
 
 type ProductProps = {
@@ -14,14 +12,8 @@ type ProductProps = {
 }
 
 export function ProductCard({data}: ProductProps) {
-    // const image = images[`/src/assets/images/products/${data.image}`];
 
     const dispatch = useDispatch<AppDispatch>();
-
-    // const item = useSelector(
-    //     (state: RootState) =>
-    //         state.cart.items.find(cartItem => cartItem.product.id === data.id)
-    // );
 
     const addItemToCart = () => {
         try {
@@ -74,7 +66,7 @@ export function ProductCard({data}: ProductProps) {
 
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                        <span className="text-lg font-bold text-gray-900">${data.price}</span>
+                        <span className="text-lg font-bold text-gray-900">{data.currency}{data.price}</span>
                     </div>
 
                     <button

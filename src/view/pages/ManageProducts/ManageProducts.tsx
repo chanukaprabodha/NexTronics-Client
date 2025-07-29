@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Pencil, Plus, Trash2} from "lucide-react";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../../store/store.ts";
-import {addProduct, deleteProduct, getAllProducts, updateProduct} from "../../slices/productSlice.ts";
+import type {AppDispatch, RootState} from "../../../store/store.ts";
+import {addProduct, deleteProduct, getAllProducts, updateProduct} from "../../../slices/productSlice.ts";
 import Swal from "sweetalert2";
-import {IdGenerator} from "../../utils/IdGenerator.ts";
-import type {ProductData} from "../../modal/ProductData.ts";
+import {IdGenerator} from "../../../utils/IdGenerator.ts";
+import type {ProductData} from "../../../modal/ProductData.ts";
 
 export function ManageProducts() {
 

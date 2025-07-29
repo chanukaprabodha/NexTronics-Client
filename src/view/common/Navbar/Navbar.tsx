@@ -108,10 +108,10 @@ export function Navbar(onToggleSidebar, cartItemCount) {
                                     className="flex items-center space-x-3 p-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                                 >
                                     <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                                        <span className="text-white font-medium text-sm">JD</span>
+                                        <span className="text-white font-medium text-sm">{username?.charAt(0)}</span>
                                     </div>
                                     <div className="hidden md:block text-left">
-                                        <p className="text-sm font-medium text-gray-900">John Doe</p>
+                                        <p className="text-sm font-medium text-gray-900">{username}</p>
                                         <p className="text-xs text-gray-500">Administrator</p>
                                     </div>
                                     <ChevronDown className="w-4 h-4 text-gray-400"/>
@@ -176,7 +176,6 @@ export function Navbar(onToggleSidebar, cartItemCount) {
                                 {/* Cart */}
                                 <button className="p-2 text-gray-400 hover:text-gray-500 transition-colors relative"
                                 onClick={() => {
-                                    console.log("Cart button clicked");
                                     setIsOpen(true)
                                 }}>
                                     <ShoppingCart className="h-5 w-5"/>
@@ -194,8 +193,10 @@ export function Navbar(onToggleSidebar, cartItemCount) {
                                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                         className="flex items-center space-x-2 p-2 text-gray-700 hover:text-gray-900 transition-colors"
                                     >
-                                        <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                                            <User className="w-4 h-4"/>
+                                        <div
+                                            className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                                            <span
+                                                className="text-white font-medium text-sm">{username?.charAt(0)}</span>
                                         </div>
                                         <span className="hidden sm:block font-medium">{username}</span>
                                         <ChevronDown className="w-4 h-4"/>
